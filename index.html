@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GovTrace - Dehradun District Government Spending Transparency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #1e3c72;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px 18px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tbody tr:hover {
+            background: #f5f7ff;
+        }
+
+        .amount {
+            font-weight: 600;
+            color: #2a5298;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.ongoing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.planned {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9em;
+        }
+
+        .chart-placeholder {
+            background: #f8f9fa;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 2px dashed #ccc;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛️ GovTrace</h1>
+            <p class="subtitle">Dehradun District - Government Fund Allocation & Transparency Portal</p>
+            <p style="margin-top: 15px; font-size: 0.95em;">Financial Year 2024-25</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Budget Allocated</div>
+                <div class="stat-value">₹2,450 Cr</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Amount Disbursed</div>
+                <div class="stat-value">₹1,890 Cr</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Projects</div>
+                <div class="stat-value">247</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Beneficiaries</div>
+                <div class="stat-value">1.2M+</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h2>📊 Department-wise Fund Distribution</h2>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Department</th>
+                            <th>Budget Allocated</th>
+                            <th>Amount Spent</th>
+                            <th>Utilization %</th>
+                            <th>Projects</th>
+                            <th>Beneficiaries</th>
+                            <th>Status</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Public Works (PWD)</td>
+                            <td class="amount">₹485 Cr</td>
+                            <td class="amount">₹412 Cr</td>
+                            <td>85%</td>
+                            <td>42</td>
+                            <td>850,000</td>
+                            <td><span class="status ongoing">Ongoing</span></td>
+                            <td>Jan 10, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Education</td>
+                            <td class="amount">₹420 Cr</td>
+                            <td class="amount">₹398 Cr</td>
+                            <td>95%</td>
+                            <td>68</td>
+                            <td>325,000</td>
+                            <td><span class="status completed">Completed</span></td>
+                            <td>Jan 12, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Health & Medical</td>
+                            <td class="amount">₹380 Cr</td>
+                            <td class="amount">₹342 Cr</td>
+                            <td>90%</td>
+                            <td>35</td>
+                            <td>1,200,000</td>
+                            <td><span class="status ongoing">Ongoing</span></td>
+                            <td>Jan 11, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Rural Development</td>
+                            <td class="amount">₹295 Cr</td>
+                            <td class="amount">₹256 Cr</td>
+                            <td>87%</td>
+                            <td>52</td>
+                            <td>480,000</td>
+                            <td><span class="status ongoing">Ongoing</span></td>
+                            <td>Jan 09, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Water Supply & Sanitation</td>
+                            <td class="amount">₹265 Cr</td>
+                            <td class="amount">₹198 Cr</td>
+                            <td>75%</td>
+                            <td>28</td>
+                            <td>650,000</td>
+                            <td><span class="status ongoing">Ongoing</span></td>
+                            <td>Jan 08, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Agriculture</td>
+                            <td class="amount">₹185 Cr</td>
+                            <td class="amount">₹162 Cr</td>
+                            <td>88%</td>
+                            <td>15</td>
+                            <td>95,000</td>
+                            <td><span class="status ongoing">Ongoing</span></td>
+                            <td>Jan 13, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Social Welfare</td>
+                            <td class="amount">₹155 Cr</td>
+                            <td class="amount">₹142 Cr</td>
+                            <td>92%</td>
+                            <td>22</td>
+                            <td>180,000</td>
+                            <td><span class="status completed">Completed</span></td>
+                            <td>Jan 12, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Urban Development</td>
+                            <td class="amount">₹145 Cr</td>
+                            <td class="amount">₹118 Cr</td>
+                            <td>81%</td>
+                            <td>18</td>
+                            <td>420,000</td>
+                            <td><span class="status ongoing">Ongoing</span></td>
+                            <td>Jan 10, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Police & Law Enforcement</td>
+                            <td class="amount">₹95 Cr</td>
+                            <td class="amount">₹89 Cr</td>
+                            <td>94%</td>
+                            <td>8</td>
+                            <td>N/A</td>
+                            <td><span class="status ongoing">Ongoing</span></td>
+                            <td>Jan 11, 2026</td>
+                        </tr>
+                        <tr>
+                            <td>Tourism & Culture</td>
+                            <td class="amount">₹25 Cr</td>
+                            <td class="amount">₹18 Cr</td>
+                            <td>72%</td>
+                            <td>6</td>
+                            <td>N/A</td>
+                            <td><span class="status planned">Planned</span></td>
+                            <td>Jan 07, 2026</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>🎯 Key Transparency Metrics</h2>
+            
+            <div class="stats-grid" style="background: white; padding: 30px 40px;">
+                <div class="stat-card">
+                    <div class="stat-label">Average Fund Utilization</div>
+                    <div class="stat-value" style="font-size: 1.8em;">86.5%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">On-Time Project Completion</div>
+                    <div class="stat-value" style="font-size: 1.8em;">78%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Pending Approvals</div>
+                    <div class="stat-value" style="font-size: 1.8em;">12</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Audit Compliance</div>
+                    <div class="stat-value" style="font-size: 1.8em;">94%</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; padding: 30px; background: #e8f4f8; border-radius: 10px; border-left: 5px solid #2a5298;">
+                <h3 style="color: #1e3c72; margin-bottom: 15px;">📢 About GovTrace</h3>
+                <p style="line-height: 1.8; color: #333;">
+                    GovTrace is Dehradun District's official transparency portal providing real-time information about government fund allocation, 
+                    departmental spending, and project implementation. All data is updated regularly and verified through official government sources. 
+                    Citizens can track how public funds are being utilized for the development and welfare of the district.
+                </p>
+                <p style="margin-top: 15px; line-height: 1.8; color: #333;">
+                    <strong>Data Source:</strong> District Administration, Dehradun | <strong>Update Frequency:</strong> Weekly | 
+                    <strong>Contact:</strong> transparency@dehradun.gov.in
+                </p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 GovTrace - Dehradun District Administration</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Committed to Transparency & Accountability</p>
+        </footer>
+    </div>
+</body>
+</html>
